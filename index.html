@@ -1,7 +1,16 @@
+<!DOCTYPE html>
 <html>
   <head>
+    <meta charset="utf-8">
+    <title>Markdown Editor</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="markdown editor">
+
     <script type="text/javascript" src="node_modules/vue/dist/vue.js"></script>
-    <script type="text/javascript" src="node_modules/marked/lib/marked.js"></script>
+    <script type="text/javascript" src="node_modules/marked/marked.min.js"></script>
+    <script type="text/javascript" src="node_modules/highlight.js/lib/highlight.js"></script>
+    <link href="node_modules/highlight.js/styles/github.css" rel="stylesheet"/>
   </head>
   <body>
 
@@ -12,6 +21,14 @@
 
 
     <script type="text/javascript">
+
+     marked.setOptions({
+       highlight: function (code) {
+         console.log(code);
+         return hljs.highlightAuto(code).value;
+       }
+     });
+
      new Vue({
        el: '#editor',
        data: {
@@ -20,7 +37,8 @@
        filters: {
          marked: marked
        }
-     })
+     });
+
     </script>
 
 
@@ -52,10 +70,6 @@
        font-size: 14px;
        font-family: 'Monaco', courier, monospace;
        padding: 20px;
-     }
-
-     code {
-       color: #f66;
      }
     </style>
 
